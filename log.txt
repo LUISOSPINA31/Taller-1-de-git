@@ -1,0 +1,176 @@
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~
+$ git init TallerGit
+Reinitialized existing Git repository in C:/Users/Luis Ospina/TallerGit/.git/
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~
+$ git config --global user.name "Luis Miguel Ospina"
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~
+$ git config --global user.email "luis.miguel.ospina@correounivalle.edu.co"
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~
+$ cd TallerGit
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (feature)
+$ git checkout -b feature
+Switched to a new branch 'feature'
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (feature)
+$ ^[[200~echo "Texto inicial" > archivo.txt
+bash: :s^[[200~echo "Texto inicial" > archivo.txt: substitution failed
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (feature)
+$ echo "Texto inicial" > archivo.txt
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (feature)
+$ git add archivo.txt
+warning: in the working copy of 'archivo.txt', LF will be replaced by CRLF the next time Git touches it
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (feature)
+$ git commit -m "Commit inicial"
+[feature (root-commit) ccb92d7] Commit inicial
+ 1 file changed, 1 insertion(+)
+ create mode 100644 archivo.txt
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (feature)
+$ echo "Texto agregado en feature" >> archivo.txt
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (feature)
+$ git commit -am "Segundo commit en feature"
+warning: in the working copy of 'archivo.txt', LF will be replaced by CRLF the next time Git touches it
+[feature 9841e20] Segundo commit en feature
+ 1 file changed, 1 insertion(+)
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (feature)
+$ echo "Texto agregado en feature" >> archivo.txt
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (feature)
+$ git commit -am "Tercer commit en feature"
+warning: in the working copy of 'archivo.txt', LF will be replaced by CRLF the next time Git touches it
+[feature 47327d2] Tercer commit en feature
+ 1 file changed, 1 insertion(+)
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (feature)
+$ git checkout master
+error: pathspec 'master' did not match any file(s) known to git
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (feature)
+$ git checkout -b master
+Switched to a new branch 'master'
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (master)
+$ git merge feature
+Already up to date.
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (master)
+$ git reset --hard HEAD~1
+HEAD is now at 9841e20 Segundo commit en feature
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (master)
+$ git rebase feature
+Successfully rebased and updated refs/heads/master.
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (master)
+$ git checkout -b hotfix
+Switched to a new branch 'hotfix'
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (hotfix)
+$ echo "Correcci n urgente" >> archivo.txt
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (hotfix)
+$ git commit -am "Hotfix"
+warning: in the working copy of 'archivo.txt', LF will be replaced by CRLF the next time Git touches it
+[hotfix aa5cc88] Hotfix
+ 1 file changed, 1 insertion(+)
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (hotfix)
+$ git checkout master
+Switched to branch 'master'
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (master)
+$ git cherry-pick hotfix
+[master 7a50838] Hotfix
+ Date: Wed Oct 9 00:33:15 2024 -0500
+ 1 file changed, 1 insertion(+)
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (master)
+$ git reflog
+7a50838 (HEAD -> master) HEAD@{0}: cherry-pick: Hotfix
+47327d2 (feature) HEAD@{1}: checkout: moving from hotfix to master
+aa5cc88 (hotfix) HEAD@{2}: commit: Hotfix
+47327d2 (feature) HEAD@{3}: checkout: moving from master to hotfix
+47327d2 (feature) HEAD@{4}: rebase (finish): returning to refs/heads/master
+47327d2 (feature) HEAD@{5}: rebase (start): checkout feature
+9841e20 HEAD@{6}: reset: moving to HEAD~1
+47327d2 (feature) HEAD@{7}: checkout: moving from feature to master
+47327d2 (feature) HEAD@{8}: commit: Tercer commit en feature
+9841e20 HEAD@{9}: commit: Segundo commit en feature
+ccb92d7 HEAD@{10}: commit (initial): Commit inicial
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (master)
+$ git checkout feature
+Switched to branch 'feature'
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (feature)
+$ echo "Cambio en feature" > conflicto.txt
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (feature)
+$ git commit -am "Cambio en feature"
+On branch feature
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        conflicto.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (feature)
+$ git add conflicto.txt
+warning: in the working copy of 'conflicto.txt', LF will be replaced by CRLF the next time Git touches it
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (feature)
+$ git commit -am "Cambio en feature"
+[feature 9d7434e] Cambio en feature
+ 1 file changed, 1 insertion(+)
+ create mode 100644 conflicto.txt
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (feature)
+$ git checkout master
+Switched to branch 'master'
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (master)
+$ echo "Cambio en master" > conflicto.txt
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (master)
+$ git commit -am "Cambio en master"
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        conflicto.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (master)
+$ git add conflicto.txt
+warning: in the working copy of 'conflicto.txt', LF will be replaced by CRLF the next time Git touches it
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (master)
+$ git commit -am "Cambio en master"
+[master 1ba5535] Cambio en master
+ 1 file changed, 1 insertion(+)
+ create mode 100644 conflicto.txt
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (master)
+$ git merge feature
+Auto-merging conflicto.txt
+CONFLICT (add/add): Merge conflict in conflicto.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (master|MERGING)
+$ git add conflicto.txt
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (master|MERGING)
+$ git commit -am "Solucion conflicto"
+[master 52b8ab9] Solucion conflicto
+
+Luis Ospina@DESKTOP-3VHH1QP MINGW64 ~/TallerGit (master)
+$
